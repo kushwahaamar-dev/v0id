@@ -40,12 +40,10 @@ export default function Page() {
 
   const { address, signer, accounts, showAccounts, error, connect, selectAccount, disconnect } = WalletConnect();
 
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) setDecryptionKey(stored);
-    } catch { }
-  }, []);
+  // NOTE: We intentionally do NOT auto-restore from localStorage on mount.
+  // This ensures the demo always starts in the "locked" state for presentations.
+  // The key IS saved to localStorage after unlock, so within the same session
+  // a refresh will keep it unlocked (via React state, not storage restore).
 
   useEffect(() => {
     if (address && signer && status === "connect") setStatus("unlock");
