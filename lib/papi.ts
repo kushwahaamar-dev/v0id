@@ -68,22 +68,24 @@ export async function unlockContent(
   return new Promise((resolve, reject) => {
     const sub = tx.signSubmitAndWatch(signer).subscribe({
       next: (ev) => {
+        // Resolve as soon as tx is included in a best block (~6s)
+        // instead of waiting for full finality (~30s)
+        if (ev.type === "txBestBlocksState") {
+          if (!ev.found) return; // still searching
+          resolve(ev.block.hash);
+          sub.unsubscribe();
+        }
+        // Also accept finalized as fallback
         if (ev.type === "finalized") {
-          if (!ev.ok) {
-            reject(new Error("Transaction failed on-chain"));
-            return;
-          }
           resolve(ev.txHash);
           sub.unsubscribe();
         }
       },
       error: (err) => {
-        // Polkadot API throws an object for pool rejection errors.
-        // E.g., { type: "Invalid", value: { type: "Payment" } }
         if (err && typeof err === "object" && "type" in err && err.type === "Invalid") {
           const val = (err as any).value;
           if (val && val.type === "Payment") {
-            reject(new Error("Insufficient Test-PAS balance to cover amount + gas fees, or account would drop below Existential Deposit. Please use a Paseo faucet."));
+            reject(new Error("Insufficient Test-PAS balance. Please use a Paseo faucet."));
             return;
           }
         }
