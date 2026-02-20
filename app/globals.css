@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+:root {
+  --background: #131110;
+  --foreground: #FDFDF6;
+  --accent: #F3B4FE;
+  --border: rgba(255, 255, 255, 0.1);
+  --card-bg: #1A1818;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+  --color-card-bg: var(--card-bg);
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base Card Style (Flat, muted) */
+.moonbird-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+/* Solid Button Style */
+.moonbird-button {
+  background-color: var(--accent);
+  color: #131110;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.moonbird-button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+}
+
+.moonbird-button:active {
+  transform: translateY(1px);
+}
