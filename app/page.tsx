@@ -110,8 +110,9 @@ export default function Page() {
           <Moon className="h-5 w-5 text-zinc-500 cursor-pointer hover:text-white transition-colors" />
           <div className="relative">
             {address ? (
-              <button onClick={() => disconnect()} className="bg-[#2B1B54] hover:bg-[#3B2574] text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all">
-                {address.slice(0, 4)}…{address.slice(-4)}
+              <button onClick={() => { localStorage.removeItem(STORAGE_KEY); disconnect(); setDecryptionKey(null); setStatus("connect"); }}
+                className="bg-[#3A1818] hover:bg-[#4A2020] text-[#FFA0A0] px-5 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2">
+                {address.slice(0, 4)}…{address.slice(-4)} ✕
               </button>
             ) : (
               <button onClick={connect} className="bg-[#2B1B54] hover:bg-[#3B2574] text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all">
