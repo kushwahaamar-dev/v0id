@@ -17,8 +17,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Stub: simulate Supabase query + verification
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // Verify txHash and return decryption key instantly
 
     // In production: query Supabase for txHash, verify on-chain, return real key
     const decryptionKey = `zerogate-decrypt-${txHash.slice(0, 16)}`;

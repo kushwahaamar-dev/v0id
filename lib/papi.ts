@@ -35,7 +35,7 @@ async function getClient() {
     const chain = await Promise.race([
       getPaseoChain(),
       new Promise<never>((_, reject) =>
-        setTimeout(() => reject(new Error("Smoldot initialization timeout")), 5000)
+        setTimeout(() => reject(new Error("Smoldot initialization timeout")), 3000)
       ),
     ]);
     const provider = getSmProvider(chain);
