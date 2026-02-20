@@ -2,6 +2,8 @@
 
 **Local-first content paywall. No accounts. No tracking. Powered by Polkadot.**
 
+🔗 **Live Demo**: [https://v0id-one.vercel.app](https://v0id-one.vercel.app)
+
 ZeroGate replaces the "Create Account" wall with a single, permissionless on-chain payment. Creators receive 100% of funds directly. Users own content forever — no subscriptions, no data harvesting.
 
 ---
